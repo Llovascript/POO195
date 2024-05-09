@@ -4,8 +4,4 @@ class Mes:
                       "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre")
 
     def obtener_nombre(self, numero):
-        try:
-            mes = self.meses[numero - 1]
-            return mes
-        except:
-            return "numero invalido"
+        return self.meses[numero - 1]
