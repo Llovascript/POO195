@@ -1,11 +1,28 @@
-from flask import Flask,request
+from flask import Flask,request, jsonify
+from flask_mysqldb import MySQL
 
 app = Flask(__name__)
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'bdflask'
+mysql = MySQL(app)
+
 
 #ruta
+@app.route('/pruebaConexion')
+def pruebaConexion():
+    try:
+        cursor = mysql.connection.cursor()
+        cursor.execute("Select 1")
+        datos = cursor.fetchone()
+        return jsonify({'status':'Conexion exitosa', 'data':datos})
+    except Exception as ex:
+        return jsonify({'status':'Error de exitosa', 'mensaje':str(ex)})
+    
 @app.route('/')
 def principal():
-    return 'Hola Mundo Flask'
+    return "hola mundo flask"
 
 #ruta doble
 @app.route('/usuario')
