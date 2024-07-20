@@ -1,0 +1,30 @@
+{% extends "template.html" %}
+
+
+{% block body %}
+
+<h1 class="text-center mt-5 mb-5 display-4" >Editar Album</h1>
+<div class="container3 p-3" style="margin: 0 auto; width: 440px; height: 270px; border-radius: 20px; background: rgba(255, 255, 255, 0.35);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
+border: 1px solid rgba(255, 255, 255, 0.65);">
+
+        <form action="/editarAlbum/{{album.0}}" method="post">
+            
+            <label>Titulo:</label>
+            <input type="text" name="txtTitulo" value="{{album.1}}" class="form-control">
+            
+            <label>Artista:</label>
+            <input type="text" name="txtArtista" value="{{album.2}}" class="form-control">
+            
+            <label>Año:</label>
+            <input type="number" name="txtAnio" value="{{album.3}}" class="form-control">
+            
+            <button type="submit" class="btn btn-outline-success mt-3 mb-3">Actualizar Album</button>
+            
+        </form>
+</div>
+{% endblock %}
+

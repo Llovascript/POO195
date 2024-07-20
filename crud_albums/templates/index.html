@@ -1,31 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario Albums</title>
-</head>
-<body>
+{% extends "template.html" %}
+
+
+{% block body %}
+
+
 
     {% with msj=get_flashed_messages()%}
     {% if msj %}
     {% for mensaje in msj %}
-        <h1>{{ mensaje }}</h1>
+
+
+        <script>
+            Swal.fire({
+            title: "Correcto",
+            text: "Album guardado con exito",
+            icon: "OK"
+            });
+        </script>
     {%endfor%}
     {%endif%}
     {%endwith%}
 
-    <form action="/guardarAlbum" method="post">
+        <h1 class="text-center mt-5 mb-5 display-4 text-danger">Gestion de albums</h1>
+<div class="row">
+    <div class="col-md-5">
+        <div class="container" style="background: rgba(255, 255, 255, 0.35);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.65); width: 380px;">
+        <form action="/guardarAlbum" method="post">
 
-        <label >Titulo:</label>
-        <input type="text" name="txtTitulo">
-        <label >Artista:</label>
-        <input type="text" name="txtArtista">
-        <label >Año</label>
-        <input type="number" name="txtAnio">
+            
 
-        <button type="submit">Guardar Album</button>
+            <div class="mb-3">
+                <label >Titulo:</label>
+                <input type="text" name="txtTitulo" class="form-control">
+            </div>
 
-    </form>
-</body>
-</html>
+            <div class="mb-3">
+                <label >Artista:</label>
+                <input type="text" name="txtArtista" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label >Año</label>
+                <input type="number" name="txtAnio" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-outline-secondary mt-3 mb-3">Guardar Album</button>
+    
+        </form>
+
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="container2" style="width: 640px; height: 200x; margin: 0 auto;">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>ID:</td>
+                    <td>Album: </td>
+                    <td>Artista: </td>
+                    <td>Anio:</td>
+                    <td>Operaciones: </td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for album in albums %}
+                <tr>
+                    <td>{{ album.0 }}</td>
+                    <td>{{ album.1 }}</td>
+                    <td>{{ album.2 }}</td>
+                    <td>{{ album.3 }}</td>
+                    <td >
+                        <a href="/editar/{{album.0}}" class="btn btn-outline-info">Editar</a>
+                        <a onclick="deleteA('{{ album.0 }}')" href="javascript:void(0);" class="btn btn-outline-danger">Borrar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>
+    
+
+
+    {% endblock %}
